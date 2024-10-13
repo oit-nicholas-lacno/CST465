@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="styles.css" rel="stylesheet" />
+</head>
+
+<body class="background-blue">
+    <header class="header">
+        <img src="CSET_OWL.jpg" alt="CSET Owl" />
+        <h1 class="background-yellow text-main">Assignment 1</h1>
+    </header>
+    <nav class="background-gray flex">
+        <a href="oit.edu" class="link bold">Oregon Tech</a>
+        <a href="cset.oit.edu" class="link bold">CSET</a>
+    </nav>
+    <form class="background-white form grid" action="https://otapp-cstwebdev.azurewebsites.net/" method="POST">
+        <p class="grid-fullrow">About You</p>
+        <div>
+            <label for="student-id">Student ID</label>
+            <input type="text" id="student-id" name="StudentID" placeholder="918..." maxlength="9">
+        </div>
+        <div>
+            <label for="name">Name</label>
+            <input type="text" id="name" name="Name">
+        </div>
+        <div>
+            <label for="email">Email</label>
+            <input type="text" id="email" name="EmailAddress">
+        </div>
+        <div>
+            <label for="hobby">Hobby</label>
+            <input type="text" id="hobby" name="Hobby">
+        </div>
+        <div>
+            <label for="user-type">User Type</label>
+            <select name="UserType" id="user-type">
+                <option value="Student">Student</option>
+            </select>
+        </div>
+        <div>
+            <label for="band">Band</label>
+            <input type="text" id="band" name="Band">
+        </div>
+        <div class="grid-fullrow">
+            <label for="biography">Biography</label>
+            <textarea id="biography" name="Biography"></textarea>
+        </div>
+        <div class="grid-quarter">
+            <label for="course-prefix">Course Prefix</label>
+            <input type="text" id="course-prefix" name="CoursePrefix" maxlength="4">
+        </div>
+        <div class="grid-quarter">
+            <label for="course-number">Course Number</label>
+            <input type="text" id="course-number" name="CourseNumber" maxlength="3">
+        </div>
+        <div>
+            <label for="course-description">Course Description</label>
+            <input type="text" id="course-description" name="CourseDescription">
+        </div>
+        <input type="hidden" name="Nickname">
+        <button type="submit">Submit</button>
+    </form>
+    <footer>
+        <p>&copy; CSET, All Rights Reserved</p>
+    </footer>
+</body>
+
+</html>

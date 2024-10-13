@@ -1,0 +1,92 @@
+img {
+    float:left;
+    height:150px;
+}
+p{
+    color:white;
+}
+
+.background-white p{
+    color: black;
+}
+
+.background-yellow{
+    background-color: #ffd24f;
+}
+.background-blue{
+    background-color: #003767;
+}
+.background-gray{
+    background-color: #cdcdcd;
+}
+.background-white{
+    background-color: white;
+}
+
+.text-main{
+    height: 40px;
+    padding: 55px 0px 55px 300px;
+    font-size: 40px;
+}
+.header{
+    height: 150px;
+}
+
+.bold{
+    font-weight: bold;
+}
+.flex{
+    display:flex;
+    height:50px;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.link{
+    text-decoration: none;
+    font-size: 20px;
+    color: black;
+}
+
+.link:hover{
+    text-decoration: underline;
+}
+.link:active{
+    text-decoration: underline;
+}
+
+.form{
+    padding:20px;
+}
+.form p{
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns: auto auto auto auto;
+    justify-content: space-between;
+    row-gap: 20px;
+}
+.grid div{
+    grid-column:span 2;
+}
+.grid div.grid-quarter{
+    grid-column: span 1;
+}
+.grid div.grid-fullrow{
+    grid-column: span 4;
+}
+.grid div label{
+    display: block;
+}
+.grid-fullrow{
+    grid-column: span 4;
+}
+.grid textarea{
+    width: 100%;
+}
+.grid button{
+    height: 30px;
+}
