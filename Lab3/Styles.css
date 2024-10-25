@@ -31,24 +31,34 @@ header {
 }
 
 nav#mainMenu{
-    background-color: var(--gold);
-    padding: 10px;
+    background-color: var(--gold);  
 }
+
 
 ul{
     list-style-type: none;
+    margin: 0;
+    padding: 0;
 }
 
 nav ul.group{
     display: flex;
     flex-direction: row;
     align-items: stretch;
-    justify-content: space-evenly;
+    
+}
+
+nav#mainMenu ul li {
+    flex-basis: 0;
+    flex-grow: 1;
+    text-align: center;
 }
 
 nav ul.group li a{
     font-size: 24px;
     text-decoration: none;
+    padding: 10px;
+    display:block;
 }
 
 main.group{
