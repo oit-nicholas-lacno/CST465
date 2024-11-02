@@ -1,28 +1,30 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace Contact;
-
 [Route("Contact")]
 public class ContactController : Controller
 {
-    [Route("ContactHtml")]
+    [Route("HTML")]
     [HttpGet]
     public ActionResult ContactHtml()
     {
-        return View();
+        ViewBag.Title = "Contact - HTML";
+        return View(new ContactFormModel());
     }
 
-    [Route("ContactTagHelper")]
+    [Route("")]
     [HttpGet]
     public ActionResult ContactTagHelper()
     {
-        return View();
+        ViewBag.Title = "Contact - Tag Helper";
+        return View(new ContactFormModel());
     }
 
     [Route("Result")]
+    [Route("ContactHTML/Result")]
     [HttpPost]
-    public IActionResult ContactResult(Contact.ContactFormModel model)
+    public IActionResult ContactResult(ContactFormModel model)
     {
-        return View("ContactResult",model);
+        ViewBag.Title = "Contact Result";
+        return View("ContactResult", model);
     }
 }
