@@ -1,0 +1,12 @@
+﻿@using Midterm;
+@model TrueFalseQuestionModel
+
+<div>
+    <h2>@Model.Question</h2>
+    <select asp-for="@Model.Answer" class="form-select">
+        <option value="">--Select--</option>
+        <option value="true">True</option>
+        <option value="false">False</option>
+    </select>
+    <span asp-validation-for="@Model.Answer"></span>
+</div>

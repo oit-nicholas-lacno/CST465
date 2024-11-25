@@ -1,0 +1,8 @@
+﻿@using Midterm;
+@model ShortAnswerQuestionModel
+
+<div>
+    <h2>@Model.Question</h2>
+    <input asp-for="@Model.Answer" class="form-control w-100" maxlength="100"/>
+    <span asp-validation-for="@Model.Answer"></span>
+</div>

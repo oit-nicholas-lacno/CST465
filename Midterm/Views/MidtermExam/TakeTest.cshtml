@@ -1,0 +1,28 @@
+@using Midterm
+@model List<TestQuestionModel>
+@Html.ValidationSummary()
+@*TODO: Form needs to use tag helpers to post to the "TakeTest" action *@
+<form method="post" asp-action="TakeTest" asp-controller="MidtermExam">
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        if (Model[i] is TrueFalseQuestionModel)
+        {
+            <partial name="_TrueFalseQuestion" for="@Model[i]"/>
+        }
+        else if (Model[i] is ShortAnswerQuestionModel)
+        {
+            <partial name="_ShortAnswerQuestion" for="@Model[i]"/>
+        }
+        else if (Model[i] is LongAnswerQuestionModel)
+        {
+            <partial name="_LongAnswerQuestion" for="@Model[i]"/>
+        }
+        else if (Model[i] is MultipleChoiceQuestionModel)
+        {
+            <partial name="_MultipleChoiceQuestion" for="@Model[i]" />
+        }
+        <br />
+
+    }
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
