@@ -1,0 +1,15 @@
+﻿@using Lab8.DataObjects
+@model IEnumerable<ImageObject>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row">
+    @foreach(ImageObject i in Model)
+    {
+        <div class="col-3">
+           <img src="/Image/@i.ID" class="img-fluid"/>
+           <p>@i.Description</p>
+        </div>
+    }
+</div>

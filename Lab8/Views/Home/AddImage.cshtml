@@ -1,0 +1,14 @@
+﻿@model ImageModel
+
+<h2>Add Image</h2>
+<form asp-action="AddImage" asp-controller="Home" method="post" enctype="multipart/form-data">
+    <div class="row">
+        <label asp-for="ImageFile"></label>
+        <input asp-for="ImageFile" type="file" />
+    </div>
+    <div class="row">
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description"></textarea>
+    </div>
+    <button>Submit</button>
+</form>
