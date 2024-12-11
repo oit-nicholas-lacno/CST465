@@ -18,7 +18,6 @@ public class HomeController : Controller
     }
     [Route("")]
     [HttpGet("Index")]
-    [ResponseCache(Duration = 30, Location = ResponseCacheLocation.Any, NoStore= false)]
     [OutputCache]
     public IActionResult Index()
     {
@@ -49,10 +48,11 @@ public class HomeController : Controller
         img.Description = image.Description;
 
         _ImageRepo.SaveImage(img);
-        return View(image);
+        return RedirectToAction("Index");
     }
 
     [HttpGet("/Image/{id}")]
+    [ResponseCache(Duration = 30, Location = ResponseCacheLocation.Any, NoStore = false)]
     public IActionResult GetImage(int id)
     {
         return File(_ImageRepo.GetImageData(id), "image/jpeg");
