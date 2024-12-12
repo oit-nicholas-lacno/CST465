@@ -5,6 +5,8 @@ using FinalProject.DataObjects;
 using NuGet.ContentModel;
 using System.Text.Json;
 using System.Linq;
+using System.Numerics;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace FinalProject.Controllers
 {
@@ -57,11 +59,21 @@ namespace FinalProject.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("/File")]
-        public IActionResult SaveToFile(PlannerModel model)
+        public IActionResult File()
         {
-            return RedirectToAction("Index");
+            Planner planner = new();
+            if (Request.Cookies[nameof(Planner)] is not null)
+            {
+                planner = JsonSerializer.Deserialize<Planner>(Request.Cookies[nameof(Planner)]);
+            }
+
+            var filename = "planner.json";
+            byte[] bytes = System.Text.Encoding.UTF8.GetBytes(JsonSerializer.Serialize(planner));
+
+            var content = new MemoryStream(bytes);
+            return File(content, "application/json", filename);
         }
 
 
