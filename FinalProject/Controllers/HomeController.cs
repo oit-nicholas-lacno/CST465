@@ -17,6 +17,7 @@ namespace FinalProject.Controllers
             _logger = logger;
         }
 
+        [HttpGet]
         [Route("/")]
         [Route("/Index")]
         public IActionResult Index()
@@ -37,6 +38,32 @@ namespace FinalProject.Controllers
 
             return View(planner);
         }
+
+        [HttpPost]
+        [Route("/")]
+        [Route("/Index")]
+        public IActionResult Index(PlannerModel model)
+        {
+            if (model.TimeZone is null)
+                model.TimeZone = TimeZoneInfo.Local;
+            //if signed in, do x
+            Planner p = model.ToDataObject();
+            var json = JsonSerializer.Serialize(p);
+            Response.Cookies.Append(nameof(Planner), json, new CookieOptions
+            {
+                Expires = DateTimeOffset.UtcNow.AddMinutes(30)
+            });
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        [Route("/File")]
+        public IActionResult SaveToFile(PlannerModel model)
+        {
+            return RedirectToAction("Index");
+        }
+
 
         [HttpGet]
         [Route("/NewTask")]

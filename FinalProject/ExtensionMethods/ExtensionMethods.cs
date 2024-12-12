@@ -58,7 +58,8 @@ namespace FinalProject
             {
                 Task t = tm.ToDataObject();
                 t.Due = TimeZoneInfo.ConvertTimeToUtc(tm.DueDate, model.TimeZone);
-                planner.Tasks.Add(t);
+                if (t.TaskStatus != Status.Completed)
+                    planner.Tasks.Add(t);
             }
             return planner;
         }

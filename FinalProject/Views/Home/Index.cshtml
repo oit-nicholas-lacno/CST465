@@ -3,7 +3,7 @@
 }
 @model PlannerModel
 
-<div class="text-center">
+<div class="p-3">
     @{
         if (Model.Tasks.Count == 0)
         {
@@ -11,10 +11,17 @@
         }
         else
         {
-            foreach(TaskModel t in Model.Tasks)
+
+            <form asp-action="Index" asp-controller="Home" method="post">
+                <div class="position-fixed end-0 top-50">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            <input type="hidden" asp-for="@Model.TimeZone"/>
+            @for (int i = 0; i < Model.Tasks.Count; ++i)
             {
-                <partial name="_TaskPartial" for="@t"/>
+                <partial name="_TaskPartial" for="@Model.Tasks[i]" />
             }
+            </form>
         }
     }
 </div>

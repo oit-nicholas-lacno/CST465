@@ -1,9 +1,10 @@
 ﻿@model TaskModel
 
-<div class="d-flex flex-column container-fluid mb-2">
+<div class="d-flex flex-column container-fluid mb-2 bg-black bg-opacity-10 p-2 rounded">
     <div class="row">
-        <div class="col-6">
-            <h2 class="col-6">@Model.Name</h2>
+        <div class="col-6 text-start">
+            <h2 class="col-6"><strong>@Model.Name</strong></h2>
+            <input type="hidden" asp-for="@Model.Name"/>
         </div>
         <div class="col-6">
             <select asp-for="@Model.TaskStatus" class="form-select col-6">
@@ -13,10 +14,12 @@
             </select>
         </div>
     </div>
-    <div class="row">
+    <div class="row text-start">
         <p>@Model.Description</p>
+        <input type="hidden" asp-for="@Model.Description"/>
     </div>
-    <div class="row">
-        <h3>Due @Model.DueDate.ToShortDateString() @Model.DueDate.ToShortTimeString()</h3>
+    <div class="row text-start">
+        <h3>Due: @Model.DueDate.ToShortDateString() @Model.DueDate.ToShortTimeString()</h3>
+        <input type="hidden" asp-for="@Model.DueDate" />
     </div>
 </div>
