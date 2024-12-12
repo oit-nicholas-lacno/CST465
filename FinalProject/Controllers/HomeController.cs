@@ -7,6 +7,7 @@ using System.Text.Json;
 using System.Linq;
 using System.Numerics;
 using static System.Net.Mime.MediaTypeNames;
+using NuGet.Protocol;
 
 namespace FinalProject.Controllers
 {
@@ -48,7 +49,7 @@ namespace FinalProject.Controllers
         {
             if (model.TimeZone is null)
                 model.TimeZone = TimeZoneInfo.Local;
-            //if signed in, do x
+
             Planner p = model.ToDataObject();
             var json = JsonSerializer.Serialize(p);
             Response.Cookies.Append(nameof(Planner), json, new CookieOptions
@@ -76,6 +77,41 @@ namespace FinalProject.Controllers
             return File(content, "application/json", filename);
         }
 
+        [HttpGet]
+        [Route("/Import")]
+        public IActionResult Import()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Route("/Import")]
+        public IActionResult Import(JsonFileModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            using MemoryStream fileStream = new MemoryStream();
+            model.FileData.CopyTo(fileStream);
+            fileStream.Position = 0;
+            string json;
+            using (StreamReader reader = new StreamReader(fileStream))
+            {
+                json = reader.ReadToEnd();
+            }
+            Planner? p = JsonSerializer.Deserialize<Planner>(json);
+            if (p is null)
+                return View(model);
+
+            Response.Cookies.Append(nameof(Planner), json, new CookieOptions
+            {
+                Expires = DateTimeOffset.UtcNow.AddMinutes(30)
+            });
+
+            return RedirectToAction("Index");
+        }
 
         [HttpGet]
         [Route("/NewTask")]

@@ -1,0 +1,14 @@
+﻿@model JsonFileModel
+@{
+    ViewData["Title"] = "Import Planner";
+}
+
+<form asp-action="Import" asp-controller="Home" method="post" enctype="multipart/form-data">
+    <div class="row form-group">
+        <label asp-for="FileData">JSON File: </label>
+        <input type="file" asp-for="FileData" />
+    </div>
+    <div class="row">
+        <button type="submit" class="btn btn-primary">Import</button>
+    </div>
+</form>
