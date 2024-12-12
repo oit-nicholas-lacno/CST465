@@ -2,7 +2,6 @@
 {
     public class Planner
     {
-        public TimeZoneInfo TimeZone { get; set; }
-        public List<Month> Months { get; set; }
+        public List<Task> Tasks { get; set; }
     }
 }
