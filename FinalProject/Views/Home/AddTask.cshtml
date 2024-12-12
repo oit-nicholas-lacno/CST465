@@ -8,12 +8,12 @@
 <form asp-action="AddTask" asp-controller="Home" method="POST">
     <div class="form-group row">
         <label asp-for="Name"></label>
-        <input asp-for="Name" class="form-control" placeholder="Name (required)"/>
+        <input asp-for="Name" class="form-control" placeholder="Name (required)" maxlength="100"/>
         <span asp-validation-for="Name"></span>
     </div>
     <div class="form-group row">
         <label asp-for="Description"></label>
-        <textarea asp-for="Description" placeholder="Description (optional)"></textarea>
+        <textarea asp-for="Description" placeholder="Description (required)" maxlength="300"></textarea>
         <span asp-validation-for="Description"></span>
     </div>
     <div class="form-group row">

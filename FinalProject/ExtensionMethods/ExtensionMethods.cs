@@ -37,5 +37,30 @@ namespace FinalProject
             }
             return task;
         }
+
+        public static PlannerModel ToModel(this Planner planner)
+        {
+            PlannerModel model = new();
+            model.TimeZone = TimeZoneInfo.Local;
+            foreach (Task t in planner.Tasks)
+            {
+                var tmodel = t.ToModel();
+                tmodel.DueDate = TimeZoneInfo.ConvertTimeFromUtc(t.Due, model.TimeZone);
+                model.Tasks.Add(tmodel);
+            }
+            return model;
+        }
+
+        public static Planner ToDataObject(this PlannerModel model)
+        {
+            Planner planner = new();
+            foreach (TaskModel tm in model.Tasks)
+            {
+                Task t = tm.ToDataObject();
+                t.Due = TimeZoneInfo.ConvertTimeToUtc(tm.DueDate, model.TimeZone);
+                planner.Tasks.Add(t);
+            }
+            return planner;
+        }
     }
 }

@@ -1,7 +1,20 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@model PlannerModel
 
 <div class="text-center">
-    
+    @{
+        if (Model.Tasks.Count == 0)
+        {
+            <p>No tasks found, click "Add Task" to add one</p>
+        }
+        else
+        {
+            foreach(TaskModel t in Model.Tasks)
+            {
+                <partial name="_TaskPartial" for="@t"/>
+            }
+        }
+    }
 </div>

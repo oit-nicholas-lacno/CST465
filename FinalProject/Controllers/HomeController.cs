@@ -2,6 +2,9 @@ using FinalProject.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using FinalProject.DataObjects;
+using NuGet.ContentModel;
+using System.Text.Json;
+using System.Linq;
 
 namespace FinalProject.Controllers
 {
@@ -15,9 +18,24 @@ namespace FinalProject.Controllers
         }
 
         [Route("/")]
+        [Route("/Index")]
         public IActionResult Index()
         {
-            return View();
+            PlannerModel planner = new();
+            if (Request.Cookies[nameof(Planner)] is not null)
+            {
+                planner = JsonSerializer.Deserialize<Planner>(Request.Cookies[nameof(Planner)]).ToModel();
+            }
+            else
+            {
+                var json = JsonSerializer.Serialize(planner.ToDataObject());
+                Response.Cookies.Append(nameof(Planner), json, new CookieOptions
+                {
+                    Expires = DateTimeOffset.UtcNow.AddMinutes(30)
+                });
+            }
+
+            return View(planner);
         }
 
         [HttpGet]
@@ -41,7 +59,19 @@ namespace FinalProject.Controllers
             model.TaskStatus = "NotStarted";
             //add task to list and cookies here
             var task = model.ToDataObject();
-            model = task.ToModel();
+            task.Due = task.Due.ToUniversalTime();
+
+            Planner planner = new();
+            if (Request.Cookies[nameof(Planner)] is not null)
+            {
+                planner = JsonSerializer.Deserialize<Planner>(Request.Cookies[nameof(Planner)]);
+            }
+            planner.AddTask(task);
+            var json = JsonSerializer.Serialize(planner);
+            Response.Cookies.Append(nameof(Planner), json, new CookieOptions
+            {
+                Expires = DateTimeOffset.UtcNow.AddMinutes(30)
+            });
 
             return RedirectToAction("Index");
         }
