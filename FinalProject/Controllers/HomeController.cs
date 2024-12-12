@@ -13,14 +13,19 @@ namespace FinalProject.Controllers
             _logger = logger;
         }
 
+        [Route("/")]
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult Privacy()
+        [HttpGet]
+        [Route("/NewTask")]
+        public IActionResult AddTask()
         {
-            return View();
+            TaskModel model = new();
+
+            return View(model);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
